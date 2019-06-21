@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>National Park Services Web Application</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!–– Link relevant dependencies ––>
+		<script src="Scripts/NPS_scripts.js" type="text/javascript"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<link href="CSS/StyleSheet.css" rel="stylesheet" type="text/css">
+	</head>
+	
+	<body>
+		<header>
+		<div class="heading"> 
+			<table style="width: 100%; vertical-align: center;">
+				<tr>
+					<th> <img src="https://www.stjohntradewinds.com/wp-content/uploads/2018/12/NPS-Logo.jpg" style="width: 80px; float: right;"> </th>
+					<th style="width: 630px"><div style="text-align: center;">National Park Service</div></th>
+					<th> <img src="https://www.stjohntradewinds.com/wp-content/uploads/2018/12/NPS-Logo.jpg" style="width: 80px; float: left;"> </th>
+				</tr>
+			</table>
+		</div>
+		</header>
+
+		<div class="background" style="align-items: center;">
+			<div style="line-height: 0.95; text-align: center; color: white; font-size: 100px; font-family: \"Times New Roman\";"><br>Information Kiosk </div>
+		</div>
+		<br>
+		
+		<!–– Autofill Input Boxes ––>
+		<div style="text-align: center;">
+			<table style="width: 100%">
+				<tr>
+					<td>
+						<div class="autocomplete">
+							<!–– State Filter Input Box ––>
+							By State: <input id="stateFilter" type="text" name="myState" placeholder="State">
+						</div>
+								
+						<div class="autocomplete">
+							<!–– Place Filter Input Box ––>
+							By Place: <input id="placeFilter" type="text" name="myPlace" placeholder="Place">
+						</div>	
+						<div class="autocomplete">
+							<!–– Query Search Input Box ––>
+							By Query: <input id="querySearch" type="text" name="mySearch" placeholder="Search">
+						</div>
+
+						<button id="ajax-button" class="button button1" onclick="loadAjax()">Search</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<!–– Elements used to display search results ––>
+		<div style="display:none;" id="myDiv" class="animate-bottom">
+			<div class="block" id="visitorcenters">Visitor Centers</div>
+			<div class="block" id="campgrounds">Campgrounds</div>
+			<div class="block" id="alerts">Alerts</div>
+			<div class="block" id="events">Events</div>
+			<div class="block" id="lessonplans">Lesson Plans</div>
+			<div class="block" id="relevantpeople">Relevant People</div>
+			<div class="block" id="relevantplaces">Relevant Places</div>
+			<div class="block" id="articles">Articles</div>
+			<div class="block" id="newsreleases">News</div>
+		</div>
+		
+		<!–– Elements for loading spinner and default map ––>
+		<div style="text-align: center;">
+			<div id="ajax-container" style="text-align: center;"></div>
+			<img id="map" src="https://cdn.shopify.com/s/files/1/1711/6767/products/rsz_us_scratched_final-1_e5afe20d-21e2-46bf-b46c-e20d768a5b1d_1624x.png?v=1513871341" style="width: 80%">
+		</div>
+		
+		<footer>
+			<div class="footing">
+				<br>
+				Site by Alan Cheng for 2019 Capital 1 SES MindSumo Challenge
+				<br>
+			</div>
+		</footer>
+
+		<!–– Functionality for collapsible elements ––>
+		<script type="text/javascript">
+			var coll = document.getElementsByClassName("collapsible");
+			var i;
+
+			for (i = 0; i < coll.length; i++) {
+				//Add collapsible functionality to relevent HTML elements
+				coll[i].addEventListener("click", function() {
+					this.classList.toggle("active");
+					var content = this.nextElementSibling;
+					//Expands or collapses element
+					if (content.style.maxHeight){
+						content.style.maxHeight = null;
+					} else {
+						content.style.maxHeight = content.scrollHeight + "px";
+					} 
+				});
+			}
+
+			//Adds autocomplete functionality to state and place filters
+			autocomplete(document.getElementById("stateFilter"), states);
+			autocomplete(document.getElementById("placeFilter"), places);
+		</script>
+	</body>
+			
+</html>
